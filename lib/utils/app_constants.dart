@@ -10,8 +10,24 @@ class AppConstant {
   // ignore: constant_identifier_names
   static const String RECOMMANDED_PRODUCT_URL = "/api/v1/products/recommended";
   // ignore: constant_identifier_names
-  static const String TOKEN = "DB_TOKEN";
+  static const String DRINKS_URL = "/api/v1/products/drinks";
+
+  // ignore: constant_identifier_names
+  static const String REGISTRATION_URL = "/api/v1/auth/register";
+  // ignore: constant_identifier_names
+  static const String LOGIN_URL = "/api/v1/auth/login";
+
+  // ignore: constant_identifier_names
+  static const String TOKEN = "";
+
+  // ignore: constant_identifier_names
+  static const String PHONE = "";
+  // ignore: constant_identifier_names
+  static const String PASSWORD = "";
+
   // ignore: constant_identifier_names
   static const String UPLOAD_URL = "/uploads/";
+  // ignore: constant_identifier_names
+  static const String USER_INFO_URL = "/api/v1/customer/info";
 
 }

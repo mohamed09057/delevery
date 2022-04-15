@@ -50,10 +50,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           ScaleTransition(
               scale: animation,
               child: Center(
-                child: Image.asset("assets/images/logo.png",width:Dimentions.splashSize),
+                child: Image.asset("assets/images/logoapp2.jpg",width:Dimentions.splashSize),
               )),
           Center(
-            child: Image.asset("assets/images/logo2.png",width:Dimentions.splashSize),
+            child: Image.asset("assets/images/11.jpg",width:Dimentions.splashSize),
           )
         ],
       ),

@@ -1,23 +1,26 @@
+// ignore_for_file: unused_field
+
 class Product {
-  //int? _totalSize;
-  //int? _typeId;
-  // int? _offset;
+  int? _totalSize;
+  int? _typeId;
+   int? _offset;
 
   late List<ProductModel> _products;
   List<ProductModel> get products => _products;
 
   Product(
       {required totalSize, required offset, required typeId, required foods}) {
-    // _totalSize = totalSize;
-    // _typeId = typeId;
-    // _offset = offset;
+     _totalSize = totalSize;
+     _typeId = typeId;
+    
+     _offset = offset;
     _products = foods;
   }
 
   Product.fromJson(Map<String, dynamic> json) {
-    //_totalSize = json['total_size'];
-    //_typeId = json['type_id'];
-    //_offset = json['offset'];
+    _totalSize = json['total_size'];
+    _typeId = json['type_id'];
+    _offset = json['offset'];
     if (json['products'] != null) {
       _products = <ProductModel>[];
       json['products'].forEach((v) {

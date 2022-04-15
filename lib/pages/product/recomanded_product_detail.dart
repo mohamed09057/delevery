@@ -48,9 +48,9 @@ class RecomandedProductDetail extends StatelessWidget {
                         builder: (popularProduct) {
                       return GestureDetector(
                         onTap: () {
-                          if (popularProduct.totalItems >= 1) {
+                        //  if (popularProduct.totalItems >= 1) {
                             Get.toNamed(RouteHelper.cartPage);
-                          }
+                         // }
                         },
                         child: Stack(
                           children: [
