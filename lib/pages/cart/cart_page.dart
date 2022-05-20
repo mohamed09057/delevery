@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../base/no_data_page.dart';
+import '../../controllers/location_controller.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -289,7 +290,15 @@ class CartPage extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             if (Get.find<AuthController>().userIsLogined()) {
-                              popularFoood.addToHistory(); 
+                              // popularFoood.addToHistory();
+                              if (Get.find<LocationController>()
+                                  .addressList
+                                  .isEmpty) {
+                                Get.toNamed(RouteHelper.getAddressPage());
+                              }else{
+                                Get.toNamed(RouteHelper.getInitial() );
+
+                              }
                             } else {
                               Get.toNamed(RouteHelper.getSignInPage());
                             }

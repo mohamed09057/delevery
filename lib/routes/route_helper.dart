@@ -1,3 +1,5 @@
+import 'package:deleveryapp/pages/address/add_address_page.dart';
+import 'package:deleveryapp/pages/address/pic_address_map.dart';
 import 'package:deleveryapp/pages/auth/login_page.dart';
 import 'package:deleveryapp/pages/cart/cart_page.dart';
 import 'package:deleveryapp/pages/home/home_page.dart';
@@ -8,11 +10,13 @@ import '../pages/splash/splash_page.dart';
 
 class RouteHelper {
   static const String splashPage = "/splash-page";
+  static const String addAddress = "/add-address";
   static const String initial = "/";
   static const String popularProduct = "/popular-product";
   static const String recommendedProduct = "/recommended-product";
   static const String cartPage = "/cart-page";
   static const String signInPage = "/signin-page";
+  static const String pickAddressPage = "/pick-address-page";
 
   static String getSplashPage() => splashPage;
   static String getInitial() => initial;
@@ -22,18 +26,25 @@ class RouteHelper {
       "$recommendedProduct?pageId=$pageId&page=$page";
   static String getCartPage() => cartPage;
   static String getSignInPage() => signInPage;
+  static String getAddressPage() => addAddress;
+  static String getPickAddressMapPage() => pickAddressPage;
 
   static List<GetPage> routes = [
+    GetPage(
+        name: pickAddressPage,
+        page: () {
+          PickAddressMap _pickAddressMap = Get.arguments;
+          return _pickAddressMap;
+        },
+        transition: Transition.fadeIn),
     GetPage(
         name: splashPage,
         page: () => const SplashPage(),
         transition: Transition.fadeIn),
-
-        GetPage(
+    GetPage(
         name: signInPage,
         page: () => const LoginPage(),
         transition: Transition.fadeIn),
-
     GetPage(
         name: initial,
         page: () => const HomePage(),
@@ -58,6 +69,10 @@ class RouteHelper {
     GetPage(
         name: cartPage,
         page: () => const CartPage(),
+        transition: Transition.fadeIn),
+    GetPage(
+        name: addAddress,
+        page: () => const AddAddressPage(),
         transition: Transition.fadeIn),
   ];
 }

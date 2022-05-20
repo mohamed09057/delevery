@@ -1,14 +1,17 @@
 import 'package:deleveryapp/controllers/cart_controller.dart';
 import 'package:deleveryapp/controllers/popular_product_controller.dart';
+import 'package:deleveryapp/controllers/user_controller.dart';
 import 'package:deleveryapp/routes/route_helper.dart';
+import 'package:deleveryapp/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'controllers/recommended_product_controller.dart';
+import 'controllers/recommended_product_controller.dart';          
 import 'helper/dependances.dart' as dep;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dep.init();
+  await dep.init(); 
+      Get.find<UserController>().getUserInfo();
   runApp(const MyApp());
 }
 
@@ -26,6 +29,10 @@ class MyApp extends StatelessWidget {
             title: 'DELFOO',
             initialRoute: RouteHelper.getSplashPage(),
             getPages: RouteHelper.routes,
+            theme: ThemeData(
+              primaryColor: AppColors.mainColor,
+              fontFamily: "Cairo",
+            ),
           );
         });
       },

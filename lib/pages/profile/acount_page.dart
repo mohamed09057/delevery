@@ -1,5 +1,6 @@
 import 'package:deleveryapp/controllers/auth_controller.dart';
 import 'package:deleveryapp/controllers/cart_controller.dart';
+import 'package:deleveryapp/controllers/location_controller.dart';
 import 'package:deleveryapp/controllers/user_controller.dart';
 import 'package:deleveryapp/routes/route_helper.dart';
 import 'package:deleveryapp/utils/colors.dart';
@@ -24,12 +25,14 @@ class AcountPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.mainColor,
+        centerTitle:true,
         title: const BigText(text: "Profile", color: Colors.white),
       ),
       body: GetBuilder<UserController>(builder: (userController) {
         return _userLoggedIn
-            ? (userController.isLoading
+            ? (userController.isLoading == false 
                 ? Container(
+                    //height: 500,
                     width: double.maxFinite,
                     margin: EdgeInsets.only(top: Dimentions.height20),
                     child: Column(
@@ -37,7 +40,7 @@ class AcountPage extends StatelessWidget {
                         AppIcon(
                           iconData: Icons.person,
                           iconSize: Dimentions.iconSize24 * 3,
-                          backgroundColor: AppColors.mainColor,
+                          backgroundColor: const Color.fromARGB(255, 172, 189, 187),
                           iconColor: Colors.white,
                           size: Dimentions.height30 * 5,
                         ),
@@ -84,18 +87,49 @@ class AcountPage extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: Dimentions.height20),
-                                AccountWidget(
-                                  appIcon: AppIcon(
-                                    iconData: Icons.location_on,
-                                    iconSize: Dimentions.height10 * 5 / 2,
-                                    backgroundColor: AppColors.mainColor,
-                                    iconColor: Colors.white,
-                                    size: Dimentions.height10 * 5,
-                                  ),
-                                  bigText: const BigText(
-                                    text: "Address",
-                                  ),
-                                ),
+                                GetBuilder<LocationController>(
+                                    builder: (locationController) {
+                                  if (_userLoggedIn &&
+                                      locationController.addressList.isEmpty) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Get.offNamed(
+                                            RouteHelper.getAddressPage());
+                                      },
+                                      child: AccountWidget(
+                                        appIcon: AppIcon(
+                                          iconData: Icons.location_on,
+                                          iconSize: Dimentions.height10 * 5 / 2,
+                                          backgroundColor: AppColors.mainColor,
+                                          iconColor: Colors.white,
+                                          size: Dimentions.height10 * 5,
+                                        ),
+                                        bigText: const BigText(
+                                          text: "Address",
+                                        ),
+                                      ),
+                                    );
+                                  } else {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Get.offNamed(
+                                            RouteHelper.getAddressPage());
+                                      },
+                                      child: AccountWidget(
+                                        appIcon: AppIcon(
+                                          iconData: Icons.location_on,
+                                          iconSize: Dimentions.height10 * 5 / 2,
+                                          backgroundColor: AppColors.mainColor,
+                                          iconColor: Colors.white,
+                                          size: Dimentions.height10 * 5,
+                                        ),
+                                        bigText: const BigText(
+                                          text: "add youre address",
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                }),
                                 SizedBox(height: Dimentions.height20),
                                 AccountWidget(
                                   appIcon: AppIcon(
@@ -120,8 +154,12 @@ class AcountPage extends StatelessWidget {
                                       Get.find<CartController>()
                                           .clearCartHistory();
 
+                                      Get.find<LocationController>()
+                                          .clearAddressList();
                                       Get.offNamed(RouteHelper.getSignInPage());
-                                    } else {}
+                                    } else {
+                                      Get.offNamed(RouteHelper.getSignInPage());
+                                    }
                                   },
                                   child: AccountWidget(
                                     appIcon: AppIcon(
@@ -147,40 +185,40 @@ class AcountPage extends StatelessWidget {
                 : const CustomLoader())
             : Center(
                 child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: double.maxFinite,
-                height: Dimentions.height20 * 8,
-                margin: EdgeInsets.only(
-                    left: Dimentions.width20, right: Dimentions.width20),
-                decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(Dimentions.radius20),
-                    image: const DecorationImage(
-                        image: AssetImage("assetName"), fit: BoxFit.cover)),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Get.toNamed(RouteHelper.getSignInPage());
-                },
-                child: Container(
-                    color: Colors.white,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
                     width: double.maxFinite,
-                    height: Dimentions.height20 * 5,
+                    height: Dimentions.height20 * 8,
                     margin: EdgeInsets.only(
-                        left: Dimentions.width20,
-                        right: Dimentions.width20),
+                        left: Dimentions.width20, right: Dimentions.width20),
                     decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(Dimentions.radius20),
-                    ),
-                    child: const Center(
-                        child: BigText(
-                      text: "Sign In",
-                    ))),
-              )
-            ],
+                        borderRadius:
+                            BorderRadius.circular(Dimentions.radius20),
+                        image: const DecorationImage(
+                            image: AssetImage("assetName"), fit: BoxFit.cover)),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.toNamed(RouteHelper.getSignInPage());
+                    },
+                    child: Container(
+                        width: double.maxFinite,
+                        height: Dimentions.height20 * 5,
+                        margin: EdgeInsets.only(
+                            left: Dimentions.width20,
+                            right: Dimentions.width20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              BorderRadius.circular(Dimentions.radius20),
+                        ),
+                        child: const Center(
+                            child: BigText(
+                          text: "Sign In",
+                        ))),
+                  )
+                ],
               ));
       }),
     );

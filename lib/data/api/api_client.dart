@@ -8,26 +8,26 @@ class ApiClient extends GetConnect implements GetxService {
   SharedPreferences sharedPreferences;
   late Map<String, String> _mainHeaders;
 
-  ApiClient({required this.appBaseUrl,required this.sharedPreferences}) {
+  ApiClient({required this.appBaseUrl, required this.sharedPreferences}) {
     baseUrl = appBaseUrl;
     timeout = const Duration(seconds: 30);
-    token = sharedPreferences.getString(AppConstant.TOKEN)??"";
+    token = sharedPreferences.getString(AppConstant.TOKEN) ?? "";
     _mainHeaders = {
       'Content-type': 'application/json; UTF8',
-      'Autherization': 'Bearer $token',
+      'Authorization': 'Bearer $token',
     };
   }
   void updateHeader(String token) {
     _mainHeaders = {
       'Content-type': 'application/json; UTF8',
-      'Autherization': 'Bearer $token',
+      'Authorization': 'Bearer $token',
+      'Accept': 'application/json'
     };
   }
 
   Future<Response> getData(String uri, {Map<String, String>? headers}) async {
     try {
       Response response = await get(uri, headers: headers ?? _mainHeaders);
-
       return response;
     } catch (e) {
       return Response(statusCode: 1, statusText: e.toString());

@@ -26,12 +26,12 @@ class AuthController extends GetxController implements GetxService {
     return responseModel;
   }
 
-  Future<ResponseModel> login(String email, String password) async {
+  Future<ResponseModel> login(String phone, String password) async {
     authReposetory.getUserToken();
     _isLoading = true;
     update();
     late ResponseModel responseModel;
-    Response response = await authReposetory.login(email, password);
+    Response response = await authReposetory.login(phone, password);
     if (response.statusCode == 200) {
       authReposetory.saveUserToken(response.body['token']);
       responseModel = ResponseModel(true, response.body['token']);

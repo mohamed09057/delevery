@@ -15,9 +15,9 @@ class AuthReposetory {
         AppConstant.REGISTRATION_URL, signUpBody.toJson());
   }
 
-  Future<Response> login(String email, String password) async {
+  Future<Response> login(String phone, String password) async {
     return await apiClient.postData(
-        AppConstant.LOGIN_URL, {"email": email, "password": password});
+        AppConstant.LOGIN_URL, {"phone": phone, "password": password});
   }
 
   Future<bool> saveUserToken(String token) async {

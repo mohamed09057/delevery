@@ -49,15 +49,13 @@ class _ProductPageBodyState extends State<ProductPageBody> {
           return popularProducts.isLoaded
               ? SizedBox(
                   height: Dimentions.pageView,
-                    
-                    child: PageView.builder(
-                        itemCount: popularProducts.popularProductList.length,
-                        controller: pageController,
-                        itemBuilder: (context, position) {
-                          return _buildPageItem(position,
-                              popularProducts.popularProductList[position]);
-                        }),
-                  
+                  child: PageView.builder(
+                      itemCount: popularProducts.popularProductList.length,
+                      controller: pageController,
+                      itemBuilder: (context, position) {
+                        return _buildPageItem(position,
+                            popularProducts.popularProductList[position]);
+                      }),
                 )
               // ignore: prefer_const_constructors
               : const Center(
@@ -108,7 +106,8 @@ class _ProductPageBodyState extends State<ProductPageBody> {
           ),
         ),
 
-        GetBuilder<RecommendedProductController>(builder: (recommendedProducts) {
+        GetBuilder<RecommendedProductController>(
+            builder: (recommendedProducts) {
           return recommendedProducts.isLoaded
               ? ListView.builder(
                   itemCount: recommendedProducts.recommendedProductList.length,
@@ -117,8 +116,9 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                      Get.toNamed(RouteHelper.getRecommendedProduct(index,"home"));
-                    },
+                        Get.toNamed(
+                            RouteHelper.getRecommendedProduct(index, "home"));
+                      },
                       child: Container(
                         margin: EdgeInsets.only(
                             left: Dimentions.width20,
@@ -131,13 +131,14 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                               height: Dimentions.listViewImageSize,
                               decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.circular(Dimentions.radius20),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimentions.radius20),
                                   image: DecorationImage(
                                       image: NetworkImage(AppConstant.BASE_URL +
                                           AppConstant.UPLOAD_URL +
                                           recommendedProducts
-                                              .recommendedProductList[index].img!),
+                                              .recommendedProductList[index]
+                                              .img!),
                                       fit: BoxFit.cover)),
                             ),
                             Expanded(
@@ -157,18 +158,26 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                                       left: Dimentions.width10,
                                       right: Dimentions.width10),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           BigText(
                                               text: recommendedProducts
-                                                  .recommendedProductList[index].name!),
-                                                  BigText(
-                                              text:"\$ "+ recommendedProducts
-                                                  .recommendedProductList[index].price!.toString(),color: AppColors.mainColor),
+                                                  .recommendedProductList[index]
+                                                  .name!),
+                                          BigText(
+                                              text: "\$ " +
+                                                  recommendedProducts
+                                                      .recommendedProductList[
+                                                          index]
+                                                      .price!
+                                                      .toString(),
+                                              color: AppColors.mainColor),
                                         ],
                                       ),
                                       SizedBox(
@@ -200,10 +209,12 @@ class _ProductPageBodyState extends State<ProductPageBody> {
                                         ],
                                       ),
                                     ],
+                                    
                                   ),
                                 ),
                               ),
                             ),
+                            
                           ],
                         ),
                       ),
@@ -251,8 +262,8 @@ class _ProductPageBodyState extends State<ProductPageBody> {
         children: [
           GestureDetector(
             onTap: () {
-                      Get.toNamed(RouteHelper.getPopularProduct(index,"home"));
-                    },
+              Get.toNamed(RouteHelper.getPopularProduct(index, "home"));
+            },
             child: Container(
               margin: EdgeInsets.only(
                   left: Dimentions.width10, right: Dimentions.width10),
