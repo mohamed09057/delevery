@@ -10,16 +10,18 @@ class AppTextFaield extends StatelessWidget {
   final IconData icon;
   bool isObSecure;
 
-   AppTextFaield(
+  AppTextFaield(
       {Key? key,
       required this.textEditingController,
       required this.hint,
-      required this.icon,this.isObSecure=false})
+      required this.icon,
+      this.isObSecure = false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: Dimentions.height30 * 2.8,
       margin:
           EdgeInsets.only(left: Dimentions.width20, right: Dimentions.width20),
       decoration: BoxDecoration(
@@ -34,7 +36,7 @@ class AppTextFaield extends StatelessWidget {
             )
           ]),
       child: TextField(
-        obscureText: isObSecure?true:false,
+        obscureText: isObSecure ? true : false,
         controller: textEditingController,
         decoration: InputDecoration(
           hintText: hint,

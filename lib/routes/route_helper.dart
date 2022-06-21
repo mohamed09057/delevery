@@ -1,9 +1,12 @@
+import 'package:deleveryapp/models/order_model.dart';
 import 'package:deleveryapp/pages/address/add_address_page.dart';
 import 'package:deleveryapp/pages/address/pic_address_map.dart';
 import 'package:deleveryapp/pages/auth/login_page.dart';
 import 'package:deleveryapp/pages/cart/cart_page.dart';
 import 'package:deleveryapp/pages/home/home_page.dart';
+import 'package:deleveryapp/pages/payment/payment_page.dart';
 import 'package:get/get.dart';
+import '../pages/payment/order_success_page.dart';
 import '../pages/product/popular_product_detail.dart';
 import '../pages/product/recomanded_product_detail.dart';
 import '../pages/splash/splash_page.dart';
@@ -17,6 +20,8 @@ class RouteHelper {
   static const String cartPage = "/cart-page";
   static const String signInPage = "/signin-page";
   static const String pickAddressPage = "/pick-address-page";
+  static const String payment = "/payment-page";
+  static const String orderSuccessPage = "/order-success-page";
 
   static String getSplashPage() => splashPage;
   static String getInitial() => initial;
@@ -28,6 +33,10 @@ class RouteHelper {
   static String getSignInPage() => signInPage;
   static String getAddressPage() => addAddress;
   static String getPickAddressMapPage() => pickAddressPage;
+  static String getPaymentPage(String id, int userId) =>
+      '$payment?id=$id&userId=$userId';
+  static String getOrderSuccessPage(String orderId, String status) =>
+      '$orderSuccessPage?id=$orderId&status=$status';
 
   static List<GetPage> routes = [
     GetPage(
@@ -73,6 +82,24 @@ class RouteHelper {
     GetPage(
         name: addAddress,
         page: () => const AddAddressPage(),
+        transition: Transition.fadeIn),
+    GetPage(
+      
+        name: payment,
+        page: () => PaymentPage(
+              orderModel: OrderModel(
+                id: int.parse(Get.parameters['id']!),
+                userId: int.parse(Get.parameters['userId']!),
+              ),
+            ),
+        transition: Transition.fadeIn,),
+    GetPage(
+        name: orderSuccessPage,
+        page: () => OrderSuccessPage(
+            orderId: Get.parameters['id']!,
+            status: Get.parameters['status'].toString().contains('success')
+                ? 1
+                : 0),
         transition: Transition.fadeIn),
   ];
 }

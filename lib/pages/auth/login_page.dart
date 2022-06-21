@@ -52,10 +52,10 @@ class LoginPage extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: Dimentions.screenHeight * 0.05,
+                        height: Dimentions.screenHeight * 0.02,
                       ),
                       SizedBox(
-                        height: Dimentions.screenHeight * 0.25,
+                        height: Dimentions.screenHeight * 0.2,
                         child: const Center(
                           child: CircleAvatar(
                             backgroundColor: Colors.white,
@@ -71,24 +71,25 @@ class LoginPage extends StatelessWidget {
                           left: Dimentions.screenHeight * 0.05,
                         ),
                         child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Hello",
-                                style: TextStyle(
-                                  fontSize: Dimentions.font20 * 3 +
-                                      Dimentions.font20 / 2,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Hello",
+                              style: TextStyle(
+                                fontSize: Dimentions.font20 * 3 +
+                                    Dimentions.font20 / 2,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text(
-                                "sign into your account",
-                                style: TextStyle(
-                                  fontSize: Dimentions.font20,
-                                  color: Colors.grey[500],
-                                ),
-                              )
-                            ]),
+                            ),
+                            Text(
+                              "Sign into your account",
+                              style: TextStyle(
+                                fontSize: Dimentions.font20,
+                                color: Colors.grey[500],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: Dimentions.height20,
@@ -111,12 +112,15 @@ class LoginPage extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(child: Container()),
-                          RichText(
-                            text: TextSpan(
-                              text: "already",
-                              style: TextStyle(
-                                color: Colors.grey[500],
-                                fontSize: Dimentions.font20,
+                          Container(
+                            padding: EdgeInsets.only(right: Dimentions.width20),
+                            child: RichText(
+                              text: TextSpan(
+                                text: "Sign into your account",
+                                style: TextStyle(
+                                  color: Colors.grey[500],
+                                  fontSize: Dimentions.font20,
+                                ),
                               ),
                             ),
                           ),
@@ -141,7 +145,7 @@ class LoginPage extends StatelessWidget {
                               color: AppColors.mainColor),
                           child: Center(
                             child: BigText(
-                              text: "Sign In",
+                              text: "SignIn",
                               size: Dimentions.font20 + Dimentions.font20 / 2,
                               color: Colors.white,
                             ),
@@ -149,7 +153,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: Dimentions.screenHeight * 0.05,
+                        height: Dimentions.screenHeight * 0.03,
                       ),
                       RichText(
                         text: TextSpan(
@@ -160,25 +164,21 @@ class LoginPage extends StatelessWidget {
                           ),
                           children: [
                             TextSpan(
-                              text: "Don't have an account?",
-                              style: TextStyle(
-                                color: Colors.grey[500],
-                                fontSize: Dimentions.font20,
-                              ),
-                            ),
-                            TextSpan(
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () => Get.to(() => const SignUpPage(),
                                     transition: Transition.fade),
-                              text: "create",
+                              text: " Create new",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.mainBlackColor,
-                                fontSize: Dimentions.font15,
+                                color: AppColors.mainColor,
+                                fontSize: Dimentions.font20,
                               ),
                             ),
                           ],
                         ),
+                      ),
+                      SizedBox(
+                        height: Dimentions.screenHeight * 0.05,
                       ),
                     ],
                   ),

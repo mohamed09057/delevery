@@ -22,9 +22,9 @@ class SignUpPage extends StatelessWidget {
     var nameController = TextEditingController();
     var phoneController = TextEditingController();
     var signUpImages = [
-      'food1.jpg',
-      'food1.jpg',
-      'food1.jpg',
+      'go.png',
+      'tw.png',
+      'fa.jpg',
     ];
     void _registration(AuthController authController) {
       String name = nameController.text.trim();
@@ -67,10 +67,10 @@ class SignUpPage extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: Dimentions.screenHeight * 0.05,
+                        height: Dimentions.screenHeight * 0.02,
                       ),
                       SizedBox(
-                        height: Dimentions.screenHeight * 0.25,
+                        height: Dimentions.screenHeight * 0.2,
                         child: const Center(
                           child: CircleAvatar(
                             backgroundColor: Colors.white,
@@ -122,7 +122,7 @@ class SignUpPage extends StatelessWidget {
                               color: AppColors.mainColor),
                           child: Center(
                             child: BigText(
-                              text: "Sign Up",
+                              text: "SignUp",
                               size: Dimentions.font20 + Dimentions.font20 / 2,
                               color: Colors.white,
                             ),
@@ -130,28 +130,44 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: Dimentions.height10,
+                        height: Dimentions.screenHeight * 0.03,
                       ),
-                      RichText(
-                        text: TextSpan(
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () => Get.back(),
-                          text: "already",
-                          style: TextStyle(
-                            color: Colors.grey[500],
-                            fontSize: Dimentions.font20,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              text: "Have an account?",
+                              style: TextStyle(
+                                color: Colors.grey[500],
+                                fontSize: Dimentions.font20,
+                              ),
+                            ),
                           ),
-                        ),
+                          RichText(
+                            text: TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => Get.back(),
+                              text: " LogIn",
+                              style: TextStyle(
+                                color: AppColors.mainColor,
+                                fontSize: Dimentions.font20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: Dimentions.screenHeight * 0.05,
                       ),
                       RichText(
                         text: TextSpan(
-                          text: "already",
+                          text: "SignIn using one of the folowing methods",
                           style: TextStyle(
                             color: Colors.grey[500],
-                            fontSize: Dimentions.font15,
+                            fontSize: Dimentions.font20,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),

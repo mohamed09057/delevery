@@ -4,7 +4,10 @@ class AppConstant {
   // ignore: constant_identifier_names
   static const int APP_VERSION =1;
   // ignore: constant_identifier_names
-  static const String BASE_URL = "http://192.168.43.73:8090";
+ // static const String BASE_URL = "http://192.168.43.73:8090";
+  // ignore: constant_identifier_names
+  static const String BASE_URL = "http://mvs.bslmeiyu.com";
+
   // ignore: constant_identifier_names
   static const String POPULAR_PRODUCT_URL = "/api/v1/products/popular";
   // ignore: constant_identifier_names
@@ -38,6 +41,13 @@ class AppConstant {
   static const String SEARCH_LOCATION_URI = "/api/v1/config/place-api-autocomplete";
   // ignore: constant_identifier_names
   static const String PLACE_DETILS_URI = "/api/v1/config/place-api-details";
+
+
+  // ignore: constant_identifier_names
+  static const String PLACE_ORDER_URI = "/api/v1/customer/order/place";
+  // ignore: constant_identifier_names
+  static const String ORDER_LIST_URI = "/api/v1/customer/order/list";
+
 
 
   // ignore: constant_identifier_names

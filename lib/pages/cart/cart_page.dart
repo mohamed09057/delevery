@@ -1,7 +1,11 @@
+import 'package:deleveryapp/base/show_custom_snackbar.dart';
 import 'package:deleveryapp/controllers/auth_controller.dart';
 import 'package:deleveryapp/controllers/cart_controller.dart';
+import 'package:deleveryapp/controllers/order_controller.dart';
 import 'package:deleveryapp/controllers/popular_product_controller.dart';
 import 'package:deleveryapp/controllers/recommended_product_controller.dart';
+import 'package:deleveryapp/controllers/user_controller.dart';
+import 'package:deleveryapp/models/place_order_model.dart';
 import 'package:deleveryapp/routes/route_helper.dart';
 import 'package:deleveryapp/utils/app_constants.dart';
 import 'package:deleveryapp/utils/colors.dart';
@@ -30,11 +34,16 @@ class CartPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const AppIcon(
-                  iconData: Icons.arrow_back_ios,
-                  iconColor: Colors.white,
-                  backgroundColor: AppColors.mainColor,
-                  // size: Dimentions.iconSize,
+                GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const AppIcon(
+                    iconData: Icons.arrow_back_ios,
+                    iconColor: Colors.white,
+                    backgroundColor: AppColors.mainColor,
+                    // size: Dimentions.iconSize,
+                  ),
                 ),
                 SizedBox(
                   width: Dimentions.width20 * 5,
@@ -49,11 +58,11 @@ class CartPage extends StatelessWidget {
                     backgroundColor: AppColors.mainColor,
                   ),
                 ),
-                const AppIcon(
+               /* const AppIcon(
                   iconData: Icons.shopping_cart_outlined,
                   iconColor: Colors.white,
                   backgroundColor: AppColors.mainColor,
-                )
+                )*/
               ],
             ),
           ),
@@ -290,14 +299,30 @@ class CartPage extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             if (Get.find<AuthController>().userIsLogined()) {
-                              // popularFoood.addToHistory();
                               if (Get.find<LocationController>()
                                   .addressList
                                   .isEmpty) {
                                 Get.toNamed(RouteHelper.getAddressPage());
-                              }else{
-                                Get.toNamed(RouteHelper.getInitial() );
-
+                              } else {
+                                // popularFoood.addToHistory();
+                                var user = Get.find<UserController>().userModel;
+                                var location = Get.find<LocationController>()
+                                    .getUserAddress();
+                                var cart = Get.find<CartController>().getItems;
+                                PlaceOrderBody placeOrder = PlaceOrderBody(
+                                    cart: cart,
+                                    orderAmount: 100.0,
+                                    orderNote: "ghfgejygyjge",
+                                    address: location.address,
+                                    latitude: location.latitude,
+                                    longitude: location.longitude,
+                                    contactPersonName: user!.name,
+                                    contactPersonNumber: user.phone,
+                                    scheduleAt: '',
+                                    distance: 10.0);
+                                // Get.toNamed(RouteHelper.getInitial() );
+                                Get.find<OrderController>()
+                                    .placeOrder(placeOrder, _callBack);
                               }
                             } else {
                               Get.toNamed(RouteHelper.getSignInPage());
@@ -316,5 +341,20 @@ class CartPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void _callBack(bool isSuccess, String message, String orderId) {
+    if (isSuccess == true) {
+      Get.find<CartController>().clear();
+      Get.find<CartController>().removeCartSharedPrefernce();
+      Get.find<CartController>().addToHistory();
+
+      Get.offNamed(
+          RouteHelper.getPaymentPage(
+              orderId, Get.find<UserController>().userModel!.id),
+          arguments: {'name': orderId});
+    } else {
+      showCustomSnackBar(message);
+    }
   }
 }

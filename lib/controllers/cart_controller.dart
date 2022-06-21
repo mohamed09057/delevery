@@ -110,6 +110,7 @@ class CartController extends GetxController {
   void addToHistory() {
     cartRepository.addToCartHistoryList();
     clear();
+    update();
   }
 
   void clear() {
@@ -124,7 +125,7 @@ class CartController extends GetxController {
   set setItems(Map<int, CartModel> setItems) {
     _items = {};
     _items = setItems;
-    //update();
+    update();
   }
 
   void addToCartList() {
@@ -134,6 +135,11 @@ class CartController extends GetxController {
 
   void clearCartHistory() {
     cartRepository.clearCartHistory();
+    update();
+  }
+
+  void removeCartSharedPrefernce() {
+    cartRepository.removeCartSharedPrefernce();
     update();
   }
 }

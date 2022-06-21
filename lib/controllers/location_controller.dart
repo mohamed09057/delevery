@@ -97,6 +97,8 @@ class LocationController extends GetxController implements GetxService {
           fromAddress
               ? _placemark = Placemark(name: _address)
               : _pickPlacemark = Placemark(name: _address);
+        } else {
+          _changeAddress = true;
         }
       } catch (e) {
         // ignore: avoid_print
@@ -112,7 +114,7 @@ class LocationController extends GetxController implements GetxService {
   Future<String> getAdressFromGeocoding(LatLng latLng) async {
     String _address = "NO Address";
     Response response = await locationReposetory.getAdressFromGeocoding(latLng);
-    
+
     if (response.body["status"] == "OK") {
       _address = response.body["results"][0]['formatted_address'].toString();
       //print("999999999999999999999999999"+_address);
@@ -250,7 +252,31 @@ class LocationController extends GetxController implements GetxService {
   }
 
   setLocation(
-      String placeId, String address, GoogleMapController mapController) {
+      String placeId, String address, GoogleMapController mapController) async {
     _loading = true;
+    update();
+    PlacesDetailsResponse detail;
+    Response response = await locationReposetory.setLocation(placeId);
+    detail = PlacesDetailsResponse.fromJson(response.body);
+    _pickPosition = Position(
+        longitude: detail.result.geometry!.location.lng,
+        latitude: detail.result.geometry!.location.lng,
+        timestamp: DateTime.now(),
+        accuracy: 1,
+        altitude: 1,
+        heading: 1,
+        speed: 1,
+        speedAccuracy: 1);
+    _pickPlacemark = Placemark(name: address);
+    _changeAddress = false;
+    // ignore: deprecated_member_use
+    if (!mapController.isNull) {
+      mapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+          target: LatLng(detail.result.geometry!.location.lat,
+              detail.result.geometry!.location.lat),
+          zoom: 17)));
+    }
+    _loading = false;
+    update();
   }
 }

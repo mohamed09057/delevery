@@ -53,7 +53,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                 child: Image.asset("assets/images/logoapp2.jpg",width:Dimentions.splashSize),
               )),
           Center(
-            child: Image.asset("assets/images/11.jpg",width:Dimentions.splashSize),
+            child: Image.asset("assets/images/dev.png",width:Dimentions.splashSize),
           )
         ],
       ),

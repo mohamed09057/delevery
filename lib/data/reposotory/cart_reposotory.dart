@@ -30,7 +30,7 @@ class CartRepository {
     for (int i = 0; i < cart.length; i++) {
       cartHistory.add(cart[i]);
     }
-    removeCart();
+   cart = [];
     sharedPreferences.setStringList("cart-history-list", cartHistory);
   }
 
@@ -71,5 +71,11 @@ class CartRepository {
     removeCart();
     cartHistory = [];
     sharedPreferences.remove("cart-history-list");
+  }
+
+  void removeCartSharedPrefernce(){
+    sharedPreferences.remove('cart-list');
+    sharedPreferences.remove("cart-history-list");
+
   }
 }

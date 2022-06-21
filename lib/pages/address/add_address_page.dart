@@ -33,10 +33,12 @@ class _AddAddressPageState extends State<AddAddressPage> {
   CameraPosition _cameraPosition =
       const CameraPosition(target: LatLng(45.515, -122.677), zoom: 17);
   late LatLng _initialPosition = const LatLng(45.515, -122.677);
+  
 
   @override
   void initState() {
     super.initState();
+
     _isLoged = Get.find<AuthController>().userIsLogined();
     // ignore: unnecessary_null_comparison
     if (_isLoged && Get.find<UserController>().userModel == null) {
@@ -74,8 +76,8 @@ class _AddAddressPageState extends State<AddAddressPage> {
         // ignore: unnecessary_null_comparison
         if (userController.userModel != null &&
             _contactPersonName.text.isEmpty) {
-          _contactPersonName.text = userController.userModel.name;
-          _contactPersonNumber.text = userController.userModel.phone;
+          _contactPersonName.text = userController.userModel!.name;
+          _contactPersonNumber.text = userController.userModel!.phone;
           if (Get.find<LocationController>().addressList.isNotEmpty) {
             _adressController.text =
                 Get.find<LocationController>().getUserAddress().address;
@@ -147,10 +149,11 @@ class _AddAddressPageState extends State<AddAddressPage> {
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(
-                                        right: Dimentions.width10),
+                                      right: Dimentions.width10,
+                                    ),
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: Dimentions.width20,
-                                        vertical: Dimentions.height10),
+                                      horizontal: Dimentions.width20,
+                                    ),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(
                                             Dimentions.radius20 / 4),

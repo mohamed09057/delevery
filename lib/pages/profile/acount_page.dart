@@ -6,6 +6,7 @@ import 'package:deleveryapp/routes/route_helper.dart';
 import 'package:deleveryapp/utils/colors.dart';
 import 'package:deleveryapp/utils/daimentions.dart';
 import 'package:deleveryapp/widgets/acount_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,12 +26,13 @@ class AcountPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.mainColor,
-        centerTitle:true,
-        title: const BigText(text: "Profile", color: Colors.white),
-      ),
+        centerTitle: true,
+        title: 
+           const Text("Profile page")),
+      
       body: GetBuilder<UserController>(builder: (userController) {
         return _userLoggedIn
-            ? (userController.isLoading == false 
+            ? (userController.isLoading == false
                 ? Container(
                     //height: 500,
                     width: double.maxFinite,
@@ -40,7 +42,8 @@ class AcountPage extends StatelessWidget {
                         AppIcon(
                           iconData: Icons.person,
                           iconSize: Dimentions.iconSize24 * 3,
-                          backgroundColor: const Color.fromARGB(255, 172, 189, 187),
+                          backgroundColor:
+                              const Color.fromARGB(255, 172, 189, 187),
                           iconColor: Colors.white,
                           size: Dimentions.height30 * 5,
                         ),
@@ -58,7 +61,7 @@ class AcountPage extends StatelessWidget {
                                     size: Dimentions.height10 * 5,
                                   ),
                                   bigText: BigText(
-                                      text: userController.userModel.name),
+                                      text: userController.userModel!.name),
                                 ),
                                 SizedBox(height: Dimentions.height20),
                                 AccountWidget(
@@ -70,7 +73,7 @@ class AcountPage extends StatelessWidget {
                                     size: Dimentions.height10 * 5,
                                   ),
                                   bigText: BigText(
-                                    text: userController.userModel.phone,
+                                    text: userController.userModel!.phone,
                                   ),
                                 ),
                                 SizedBox(height: Dimentions.height20),
@@ -83,7 +86,7 @@ class AcountPage extends StatelessWidget {
                                     size: Dimentions.height10 * 5,
                                   ),
                                   bigText: BigText(
-                                    text: userController.userModel.email,
+                                    text: userController.userModel!.email,
                                   ),
                                 ),
                                 SizedBox(height: Dimentions.height20),
@@ -93,8 +96,7 @@ class AcountPage extends StatelessWidget {
                                       locationController.addressList.isEmpty) {
                                     return GestureDetector(
                                       onTap: () {
-                                        Get.offNamed(
-                                            RouteHelper.getAddressPage());
+                                        Get.toNamed(RouteHelper.getAddressPage());
                                       },
                                       child: AccountWidget(
                                         appIcon: AppIcon(
@@ -174,7 +176,7 @@ class AcountPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: Dimentions.height20),
+                                SizedBox(height: Dimentions.height30),
                               ],
                             ),
                           ),
@@ -203,20 +205,30 @@ class AcountPage extends StatelessWidget {
                       Get.toNamed(RouteHelper.getSignInPage());
                     },
                     child: Container(
-                        width: double.maxFinite,
-                        height: Dimentions.height20 * 5,
-                        margin: EdgeInsets.only(
-                            left: Dimentions.width20,
-                            right: Dimentions.width20),
-                        decoration: BoxDecoration(
+                      width: double.maxFinite,
+                      height: Dimentions.height30 * 2.8,
+                      margin: EdgeInsets.only(
+                          left: Dimentions.width20, right: Dimentions.width20),
+                      decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius:
                               BorderRadius.circular(Dimentions.radius20),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4,
+                              spreadRadius: 2,
+                              offset: const Offset(1, 1),
+                              color: Colors.grey.withOpacity(0.2),
+                            )
+                          ]),
+                      child: Center(
+                        child: BigText(
+                          text: "SignIn",
+                          color: CupertinoColors.systemGrey,
+                          size: Dimentions.font20,
                         ),
-                        child: const Center(
-                            child: BigText(
-                          text: "Sign In",
-                        ))),
+                      ),
+                    ),
                   )
                 ],
               ));

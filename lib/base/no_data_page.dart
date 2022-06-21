@@ -5,7 +5,7 @@ class NoDataPage extends StatelessWidget {
   final String imgPath;
 
   const NoDataPage(
-      {Key? key, required this.text, this.imgPath = "assets/images/food2.png"})
+      {Key? key, required this.text, this.imgPath = "assets/images/his.jpg"})
       : super(key: key);
 
   @override
@@ -20,12 +20,13 @@ class NoDataPage extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.03,
         ),
-      Text( text,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: MediaQuery.of(context).size.height*0.0175,
-        color: Theme.of(context).disabledColor
-      ),),
+        Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: MediaQuery.of(context).size.height * 0.0195,
+              color: Theme.of(context).disabledColor),
+        ),
       ],
     );
   }

@@ -17,6 +17,7 @@ class AccountWidget extends StatelessWidget {
         left: Dimentions.width20,
         top: Dimentions.height10,
         right: Dimentions.width10,
+        bottom: Dimentions.width10,
       ),
       child: Row(
           children: [appIcon, SizedBox(width: Dimentions.width20), bigText]),
